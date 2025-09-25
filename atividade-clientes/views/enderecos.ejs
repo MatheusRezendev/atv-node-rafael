@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Endereços</title>
+  </head>
+  <body>
+    <h1>Gestão de Endereços</h1>
+    <a href="/enderecos/novo">Cadastrar Novo Endereço</a>
+    <hr />
+    <h2>Lista de Endereços</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Rua</th>
+          <th>Número</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>CEP</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% enderecos.forEach(endereco => { %>
+        <tr>
+          <td><%= endereco.id %></td>
+          <td><%= endereco.rua %></td>
+          <td><%= endereco.numero || '-' %></td>
+          <td><%= endereco.bairro %></td>
+          <td><%= endereco.cidade %></td>
+          <td><%= endereco.estado %></td>
+          <td><%= endereco.cep %></td>
+          <td>
+            <a href="/enderecos/editar/<%= endereco.id %>">Editar</a>
+            <form method="POST" action="/enderecos/deletar/<%= endereco.id %>" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este endereço?');">
+              <button type="submit">Deletar</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <br />
+    <a href="/">Voltar para Home</a>
+  </body>
+</html>
